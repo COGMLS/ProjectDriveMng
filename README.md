@@ -2,7 +2,7 @@
 
 This repository is designed to create a manager and a toolset for Project Drives, helping in creating, backups, remove, archive projects and documentations.
 
->**NOTE:** On current moment these tools and managers are been developed for Windows OS.
+>**NOTE:** On current moment, these tools and managers are being developed for Windows OS.
 
 ## License
 
