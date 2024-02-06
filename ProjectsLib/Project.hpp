@@ -13,7 +13,7 @@ class Project
 		std::wstring name;
 		bool exists;
 		bool isGitRepos;
-
+		std::tm creationTime;
 
 	public:
 
