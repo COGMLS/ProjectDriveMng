@@ -30,6 +30,20 @@
 .EXAMPLE
     BackupProjectDb.ps1 -ListOnlyBackups
     List only the ProjectDatabase backup files available.
+.EXAMPLE
+    BackupProjectDb.ps1 -Restore
+    Restore the ProjectDatabase file, using the newest backup file.
+.EXAMPLE
+    BackupProjectDb.ps1 -Restore -Backup
+    Make a backup of the actual database file before restore it with the newest ProjectDatabase's backup file.
+.EXAMPLE
+    BackupProjectDb.ps1 -Restore -DateTime "2024-02-21 16-14-50"
+    Restore the ProjectDatabase file, using the date and time reference backup last write time information.
+    NOTE: The date and time format accepted are: "YYYY-MM-DD hh-mm-ss" and "YYYY-MM-DD hh:mm:ss"
+.EXAMPLE
+    BackupProjectDb.ps1 -Backup -Restore -DateTime "2024-02-21 16-14-50"
+    Make a backup of the actual database file and restore the ProjectDatabase file, using the date and time reference backup last write time information. 
+    NOTE: The date and time format accepted are: "YYYY-MM-DD hh-mm-ss" and "YYYY-MM-DD hh:mm:ss"
 #>
 
 Param
@@ -45,6 +59,7 @@ Param
     $Restore,
 
     # Specify the date and time backup to restore. This parameter only have effect when Restore is used.
+    # NOTE: The date and time format accepted are: "YYYY-MM-DD hh-mm-ss" and "YYYY-MM-DD hh:mm:ss"
     [Parameter(Mandatory = $false, Position = 1)]
     [string]
     $DateTime,
