@@ -46,7 +46,7 @@ Param
 
     # Specify the date and time backup to restore. This parameter only have effect when Restore is used.
     [Parameter(Mandatory = $false, Position = 1)]
-    [System.DateTime]
+    [string]
     $DateTime,
 
     # List only backup. This option does not have effect if Backup parameter is send.
@@ -55,6 +55,7 @@ Param
     $ListOnlyBackups
 )
 
+# Global variables: (DO NOT CHANGE THEM!)
 [string]$ProjectDbBaseName = "ProjectsDatabase"
 [string]$ProjectDbExtension = ".accdb"
 [string]$ProjectDbFileName = "$($ProjectDbBaseName)$($ProjectDbExtension)"
@@ -62,6 +63,8 @@ Param
 [string]$BackupDirName = "Backup"
 [string]$BackupSigniture = "_BACKUP-"
 [string]$DateTimeStringConverter = "yyyy-MM-dd HH-mm-ss"
+[string]$RegexDateTime_Date = "\[0-9]\[0-9]\[0-9]\[0-9]-\[0-9]\[0-9]-\[0-9]\[0-9]"
+[string]$RegexDateTime_Time = "T\[0-9]:\[0-9]:\[0-9]"
 
 function MakeProjectDriveDbBackup
 {
@@ -143,10 +146,33 @@ function ListProjectDriveDb
 
 function RestoreProjectDriveDbBackup
 {
-    Param
-    (
-        [System.DateTime]$BackupDt = $null
-    )
+    [bool]$UseMostRecentBackup = $true
+    [System.DateTime]$BackupDt = [System.DateTime]::MinValue
+
+    if ($DateTime.Length -gt 0)
+    {
+        try
+        {
+            [string[]]$DtStr = $DateTime.Split(' ', 2)
+
+            if ($DtStr.Count -eq 2)
+            {
+                if ($DtStr[1].Contains('-'))
+                {
+                    $DtStr[1] = $DtStr[1].Replace('-',':')
+                }
+
+                [string]$DateTimeConverted = $DtStr[0] + "T" + $DtStr[1]
+
+                $BackupDt = [System.DateTime]::Parse($DateTimeConverted)
+                $UseMostRecentBackup = $false
+            }
+        }
+        catch
+        {
+            throw [System.Exception]::new("Fail to convert the value $($DateTime) to System.DateTime data.")
+        }
+    }
     
     [string]$BackupDirPath = [System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $BackupDirName)
     [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new($BackupDirPath)
@@ -155,14 +181,14 @@ function RestoreProjectDriveDbBackup
 
     if ($BackupDirInfo.Exists)
     {
-        [System.IO.FileInfo[]]$BackupFiles = $BackupDirInfo.GetFiles("$($ProjectDbBaseName)$($BackupSigniture)", [System.IO.SearchOption]::TopDirectoryOnly)
+        [System.IO.FileInfo[]]$BackupFiles = $BackupDirInfo.GetFiles("$($ProjectDbBaseName)$($BackupSigniture)*", [System.IO.SearchOption]::TopDirectoryOnly)
         
         if ($BackupFiles.Length -gt 0)
         {
             [System.IO.FileInfo]$Backup2Restore = $null
 
             # Restore the most recent backup.
-            if ($null -eq $BackupDt)
+            if ($UseMostRecentBackup)
             {
                 $BackupFiles = $BackupFiles | Sort-Object -Property LastWriteTime -Descending
 
@@ -193,21 +219,28 @@ function RestoreProjectDriveDbBackup
                     }
                     catch
                     {
-                        
+                        Write-Error -Message "Fail to copy file"
                     }
 
                     [System.IO.FileInfo]$CopiedFile = [System.IO.FileInfo]::new($OriginalProjectDriveDbFileInfo.FullName)
 
                     if ($CopiedFile.LastWriteTime -eq $Backup2Restore.LastWriteTime)
                     {
+                        if ($CopiedFile.IsReadOnly)
+                        {
+                            $CopiedFile.Attributes = $CopiedFile.Attributes -= [System.IO.FileAttributes]::ReadOnly
+                        }
+
                         Write-Host -Object "DataBase $($Backup2Restore.Name) from $($Backup2Restore.LastWriteTime.ToString($DateTimeStringConverter)) was restored with success!" -ForegroundColor Green
                     }
                     else
                     {
-                        Write-Host -Object "Fail in retore the DataBase file $($Backup2Restore.Name)!"
+                        Write-Host -Object "The backup dataBase file $($Backup2Restore.Name) wasn't restored!"
+                        
                         Write-Host -Object "Backup to restore:"
                         $Backup2Restore
-                        Write-Host -Object "Actual file:"
+
+                        Write-Host -Object "`nActual file:"
                         $OriginalProjectDriveDbFileInfo
                     }
                 }
@@ -238,26 +271,12 @@ if ($Backup)
 
     if ($Restore)
     {
-        if ($null -eq $DateTime)
-        {
-            RestoreProjectDriveDbBackup
-        }
-        else
-        {
-            RestoreProjectDriveDbBackup -BackupDt $DateTime
-        }
+        RestoreProjectDriveDbBackup
     }
 }
 elseif ($Restore)
 {
-    if ($null -eq $DateTime)
-    {
-        RestoreProjectDriveDbBackup
-    }
-    else
-    {
-        RestoreProjectDriveDbBackup -BackupDt $DateTime
-    }
+    RestoreProjectDriveDbBackup
 }
 elseif (-not $Backup -and -not $Restore -and $ListOnlyBackups)
 {
