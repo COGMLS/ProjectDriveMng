@@ -128,20 +128,34 @@ function ListProjectDriveDb
     [System.IO.FileInfo]$ProjectDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $ProjectDbFileName))
     [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $BackupDirName))
 
-    if ($ProjectDbFileInfo.Exists -and -not $OnlyBackups)
+    if ($ProjectDbFileInfo.Directory.Exists)
     {
-        $ProjectDbList.Add($ProjectDbFileInfo)
-    }
-
-    if ($BackupDirInfo.Exists)
-    {
-        foreach ($BackupFile in $BackupDirInfo.EnumerateFiles("$ProjectDbBaseName*", [System.IO.SearchOption]::TopDirectoryOnly))
+        if ($ProjectDbFileInfo.Exists -and -not $OnlyBackups)
         {
-            $ProjectDbList.Add($BackupFile)
+            $ProjectDbList.Add($ProjectDbFileInfo)
         }
-    }
+    
+        if ($BackupDirInfo.Exists)
+        {
+            [System.IO.FileInfo[]]$BackupFilesArr = $BackupDirInfo.GetFiles("$ProjectDbBaseName*", [System.IO.SearchOption]::TopDirectoryOnly)
 
-    $ProjectDbList | Format-Table -AutoSize
+            if ($BackupFilesArr.Length -gt 0)
+            {
+                $BackupFilesArr = $BackupFilesArr | Sort-Object -Property LastWriteTime -Descending
+
+                foreach ($BackupFile in $BackupFilesArr)
+                {
+                    $ProjectDbList.Add($BackupFile)
+                }
+            }
+        }
+        
+        $ProjectDbList | Format-Table -AutoSize
+    }
+    else
+    {
+        Write-Host -Object "The directory $($ProjectDbFileInfo.Directory.FullName) doesn't exist!"
+    }
 }
 
 function RestoreProjectDriveDbBackup
