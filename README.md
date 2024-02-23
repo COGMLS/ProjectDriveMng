@@ -4,6 +4,13 @@ This repository is designed to create a manager and a toolset for Project Drives
 
 >**NOTE:** On current moment, these tools and managers are being developed for Windows OS.
 
+# Scripts:
+
+| Name | Version | Description |
+| ---- | ------- | ----------- |
+| Backup.ps1 | 1.0.1 | Make a complete backup of ProjectDrive. |
+| BackupProjectDb.ps1 | 1.1.0 | Manage the backups and provide the possibility to restore the ProjectDataBase.accdb file. |
+
 ## License
 
 A copy is available in this [file](/LICENSE.txt)
