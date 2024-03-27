@@ -1,0 +1,3 @@
+﻿SELECT Projetos.ID AS IDDoProjeto, Projetos.[Nome do Projeto], Projetos.Status, Projetos.Proprietário, Projetos.Categoria, Projetos.Prioridade, Projetos.Status, Projetos.[Data de Início], Projetos.[Data de Término], Projetos.[Orçamento em Dias], Projetos.Orçamento, CCur(Nz(Sum([Tarefas].[Custo]),0)) AS [Custo das Tarefas], CDbl(Nz(Sum([Tarefas].[Custo em Dias]),0)) AS [Custo das Tarefas em Dias]
+FROM Tarefas RIGHT JOIN Projetos ON Tarefas.[Projeto] = Projetos.ID
+GROUP BY Projetos.ID, Projetos.[Nome do Projeto], Projetos.Proprietário, Projetos.Categoria, Projetos.Prioridade, Projetos.Status, Projetos.[Data de Início], Projetos.[Data de Término], Projetos.[Orçamento em Dias], Projetos.Orçamento, Projetos.Status;
