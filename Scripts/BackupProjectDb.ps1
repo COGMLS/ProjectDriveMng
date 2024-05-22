@@ -3,7 +3,7 @@
  # --------------------------------------------------------
  # Author: Matheus L. Silvati
  # ------------------------------------
- # Version: 1.0.0
+ # Version: 1.0.1
  # ------------------------------------
  # PowerShell Minimum Version: 7.0
  # --------------------------------------------------------
@@ -71,6 +71,7 @@ Param
 )
 
 # Global variables: (DO NOT CHANGE THEM!)
+[string]$ProjectDriveRoot = ""
 [string]$ProjectDbBaseName = "ProjectsDatabase"
 [string]$ProjectDbExtension = ".accdb"
 [string]$ProjectDbFileName = "$($ProjectDbBaseName)$($ProjectDbExtension)"
@@ -81,13 +82,34 @@ Param
 [string]$RegexDateTime_Date = "\[0-9]\[0-9]\[0-9]\[0-9]-\[0-9]\[0-9]-\[0-9]\[0-9]"
 [string]$RegexDateTime_Time = "T\[0-9]:\[0-9]:\[0-9]"
 
+# Set the ProjectDriveRoot variable:
+if ($IsWindows)
+{
+    $ProjectDriveRoot = $env:ProjectDrive
+}
+elseif ($IsLinux)
+{
+    #$ProjectDriveRoot = $env:ProjectDrive
+    Write-Warning -Message "On current moment the Linux platform is not recognizing the ProjectDrive variable. You need to set manually."
+    $ProjectDriveRoot = Read-Host -Prompt "Enter with the complete path to ProjectDrive"
+}
+else
+{
+    throw [System.Exception]::new("Fail to get the Project Drive location, because the OS Environment is not compatible!")
+}
+
+if (-not (Test-Path -Path $ProjectDriveRoot -ErrorAction SilentlyContinue))
+{
+    throw [System.Exception]::new("Fail to get the Project Drive location, because the path does not exist!")
+}
+
 function MakeProjectDriveDbBackup
 {
-    [System.IO.FileInfo]$ProjectDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $ProjectDbFileName))
+    [System.IO.FileInfo]$ProjectDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $ProjectDbFileName))
 
     if ($ProjectDbFileInfo.Exists)
     {
-        [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $BackupDirName))
+        [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new([System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $BackupDirName))
 
         if (-not $BackupDirInfo.Exists)
         {
@@ -140,8 +162,8 @@ function ListProjectDriveDb
 
     [System.Collections.Generic.List[System.IO.FileInfo]]$ProjectDbList = [System.Collections.Generic.List[System.IO.FileInfo]]::new()
 
-    [System.IO.FileInfo]$ProjectDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $ProjectDbFileName))
-    [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $BackupDirName))
+    [System.IO.FileInfo]$ProjectDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $ProjectDbFileName))
+    [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new([System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $BackupDirName))
 
     if ($ProjectDbFileInfo.Directory.Exists)
     {
@@ -203,10 +225,10 @@ function RestoreProjectDriveDbBackup
         }
     }
     
-    [string]$BackupDirPath = [System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $BackupDirName)
+    [string]$BackupDirPath = [System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $BackupDirName)
     [System.IO.DirectoryInfo]$BackupDirInfo = [System.IO.DirectoryInfo]::new($BackupDirPath)
 
-    [System.IO.FileInfo]$OriginalProjectDriveDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($env:ProjectDrive, $ManagementFolder, $ProjectDbFileName))
+    [System.IO.FileInfo]$OriginalProjectDriveDbFileInfo = [System.IO.FileInfo]::new([System.IO.Path]::Combine($ProjectDriveRoot, $ManagementFolder, $ProjectDbFileName))
 
     if ($BackupDirInfo.Exists)
     {
