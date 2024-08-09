@@ -37,3 +37,4 @@ project(ProjectDriveMngHelper VERSION 0.0.1 DESCRIPTION "Complete solution for P
 ###########################################################
 
 add_subdirectory("ProjectDriveMng")
+add_subdirectory("Tools")
