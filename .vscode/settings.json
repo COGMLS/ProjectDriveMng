@@ -49,5 +49,7 @@
         },
         "editor.suggest.preview": true,
         "files.encoding": "utf8"
-    }
+    },
+    "cmake.options.statusBarVisibility": "icon",
+    "cmake.useCMakePresets": "never",
 }
