@@ -4,12 +4,34 @@ This repository is designed to create a manager and a toolset for Project Drives
 
 >**NOTE:** On current moment, these tools and managers are being developed for Windows OS.
 
-# Scripts:
+# Project Components:
 
-| Name | Version | Description |
-| ---- | ------- | ----------- |
-| Backup.ps1 | 1.0.1 | Make a complete backup of ProjectDrive. |
-| BackupProjectDb.ps1 | 1.1.0 | Manage the backups and provide the possibility to restore the ProjectDataBase.accdb file. |
+| Name | Version | Description | Status |
+| ---- | ------- | ----------- | ------ |
+| DriveManager | 0.0.1a | Project Drive Manager console | ✅ |
+| Backup.ps1 | 1.0.1 | Make a complete backup of ProjectDrive. | ✅ |
+| BackupProjectDb.ps1 | 1.1.0 | Manage the backups and provide the possibility to restore the ProjectDataBase.accdb file. | ✅ |
+| DotNetConsoleExtensions | 0.2.0a | Extensions for console | ❌ |
+| ProjectDriveConsole (from .Net) | 0.0.2a | Project Drive Manager console | ❌ |
+| Project Manager Library (from .Net) | 0.0.1a | Library to manage the projects in ProjectDriveConsole | ❌ |
+| Project Drive Manager (C++) | 0.0.1a | Project Drive Manager console | ✅ |
+| Database Manager Library | 0.0.1a | Database manager library | ✅ |
+| Drive Manager Library | 0.0.1a | Drive manager library | ✅ |
+| Project Repository Manager library | 0.0.1a | Project repository manager for git repositories | ✅ |
+
+### About Project Status:
+
+| Symbol | Description |
+| --- | --- |
+| ✅ | In development or with in active support | 
+| ⚠️ | Warning info |
+| ❌ | Not in development or cancelled |
+| ❗ | Important |
+| 📌 | Note |
+| 🧪 | Under tests |
+| ⏳ | In legacy support |
+| 🗄️ | Archived project |
+| 💡 | Idea for a project or tool |
 
 ## License
 
