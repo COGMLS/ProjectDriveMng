@@ -26,6 +26,20 @@ std::filesystem::path getPlacesPath()
 	return places;
 }
 
+bool placesDirExists()
+{
+	std::filesystem::path home = getHomePath();
+
+	if (home.empty())
+	{
+		return false;
+	}
+
+	std::filesystem::path places = home / PLACES_DIR;
+
+	return std::filesystem::exists(places);
+}
+
 std::filesystem::path getRemoteLinkSelectorPath()
 {
 	std::filesystem::path home = getHomePath();
@@ -38,6 +52,20 @@ std::filesystem::path getRemoteLinkSelectorPath()
 	std::filesystem::path remoteLinkSel = home / REMOTE_GIT_CONFIG_DIR;
 
 	return remoteLinkSel;
+}
+
+bool remoteLinkSelectorDirExists()
+{
+    std::filesystem::path remoteLnkSel = getHomePath();
+
+	if (remoteLnkSel.empty())
+	{
+		return false;
+	}
+
+	remoteLnkSel = remoteLnkSel / REMOTE_GIT_CONFIG_DIR;
+
+	return std::filesystem::exists(remoteLnkSel);
 }
 
 int chkRemoteLinkSelectorDir()
