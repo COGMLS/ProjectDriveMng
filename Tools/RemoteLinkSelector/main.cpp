@@ -25,19 +25,19 @@ int main (int argc, const char* argv[], const char* argp[])
 	// Check for user credentials:
 	// NOTE: no root user is allowed by this application!
 
-	__uid_t me = getuid();
-	__uid_t myprivs = geteuid();
+	uid_t me = getuid();
+	uid_t myPrivileges = geteuid();
 
-	if (me != myprivs)
+	if (me != myPrivileges)
 	{
-		std::cout << "User ID: " << me << " | User privileges: " << myprivs <<std::endl;
+		std::cout << "User ID: " << me << " | User privileges: " << myPrivileges <<std::endl;
 		std::cout << "This program is designed to run only with current user privileges!" << std::endl << "Aborting the application." << std::endl;
 		return -1;
 	}
 
 	if (me == 0)
 	{
-		std::cout << "User ID: " << me << " | User privileges: " << myprivs <<std::endl;
+		std::cout << "User ID: " << me << " | User privileges: " << myPrivileges <<std::endl;
 		std::cout << "This program is designed to run only with non root privileges!" << std::endl << "Aborting the application." << std::endl;
 		return -2;
 	}
