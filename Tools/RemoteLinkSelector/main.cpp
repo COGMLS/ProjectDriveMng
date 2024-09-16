@@ -47,6 +47,7 @@ int main (int argc, const char* argv[], const char* argp[])
 	std::queue<cmd> cmdQueue;
 	std::vector<std::string> cmdLineVec;
 
+	// Start from the second position the command line analysis:
 	for (size_t i = 1; i < argc; i++)
 	{
 		//cmdLineVec.push_back(argv[i]);
@@ -68,7 +69,7 @@ int main (int argc, const char* argv[], const char* argp[])
 			std::cout << "Current git remote server reference link path: " << refLink.string() << std::endl;
 		}
 
-		return 2;
+		return 0;
 	}
 
 	while (!cmdQueue.empty())
@@ -98,7 +99,7 @@ int main (int argc, const char* argv[], const char* argp[])
 				{
 					if (cmdQueue.empty())
 					{
-						return 3;
+						return 3;	// No arguments available for LIST command
 					}
 
 					if (cmdQueue.front().getType() == CMDTYPE::ARGUMENT)
@@ -142,12 +143,12 @@ int main (int argc, const char* argv[], const char* argp[])
 						}
 						else
 						{
-							return 4;
+							return 4;	// Missing argument for LIST command
 						}
 					}
 					else
 					{
-						return 4;
+						return 4;		// Only one command by the time
 					}
 
 					break;
@@ -167,7 +168,7 @@ int main (int argc, const char* argv[], const char* argp[])
 
 					if (computer.empty() || source.empty())
 					{
-						return 5;
+						return 5;	// If "computer" or "source" values are not available.
 					}
 
 					configData newCfg;
@@ -186,7 +187,7 @@ int main (int argc, const char* argv[], const char* argp[])
 					else
 					{
 						std::cout << "Fail to save your configurations. Exit Code: " << saveStatus << std::endl;
-						return 5;
+						return 6;
 					}
 
 					break;
