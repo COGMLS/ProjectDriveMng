@@ -47,16 +47,21 @@ project(
 
 # Include libraries directories source codes:
 #include_directories("${ReposRoot}/Libs/<lib>")
+target_include_directories(ConsoleExtensions PUBLIC "${ProjectDriveMngRoot}/Libs/Imported/ConsoleExtensions")
+target_include_directories(LoggerLib PUBLIC "${ProjectDriveMngRoot}/Libs/Imported/LoggerLib")
+target_include_directories(VersionLib PUBLIC "${ProjectDriveMngRoot}/Libs/VersionLib")
 
 # Define the executable properties:
 add_executable(
 					ProjectDriveMng
 					"main.cpp"
+					"ProjectDriveMngVersion.hpp"
+					"VersionDataBase.hpp"
 				)
 
 # Define manual library link:
 set(UseManualTargetLinkLibs False)
-				
+
 # Link the VersionLib:
 if(UseManualTargetLinkLibs)
 	if (WIN32)
@@ -71,4 +76,5 @@ if(UseManualTargetLinkLibs)
 else()
 	target_link_libraries(ProjectDriveMng VersionLib)
 	target_link_libraries(ProjectDriveMng LoggerLib)
+	target_link_libraries(ProjectDriveMng ConsoleExtensions)
 endif()

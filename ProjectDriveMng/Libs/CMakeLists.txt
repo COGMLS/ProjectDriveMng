@@ -30,3 +30,4 @@ project(
 #add_subdirectory("Imported")
 add_subdirectory("Imported/LoggerLib")
 add_subdirectory("Imported/VersionLib")
+add_subdirectory("Imported/ConsoleExtensions")

@@ -52,4 +52,5 @@
     },
     "cmake.options.statusBarVisibility": "icon",
     "cmake.useCMakePresets": "never",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 }
