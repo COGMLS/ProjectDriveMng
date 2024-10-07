@@ -1,6 +1,6 @@
 ﻿###########################################################
 #
-# CMakeLists: Project Drive Manager Solution
+# CMakeLists: Project Drive Manager Imported Libraries
 #
 ###########################################################
 
@@ -12,16 +12,13 @@ cmake_minimum_required(VERSION 3.28)
 #
 ###########################################################
 
-# Define current project base working directory location:
-set(ProjectDriveMngRoot ${CMAKE_CURRENT_LIST_DIR})
-
-# Define if will set the project debug definition:
-set(DebugProjectDriveMng True)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 project(
-			ProjectDriveMngSolution
-			VERSION 0.0.1
-			DESCRIPTION "Project Drive Manager Solution"
+			ProjectDriveMngImportedLibs
+			VERSION 1.0.0
+			DESCRIPTION "Project Drive Manager imported libraries."
 		)
 
 ###########################################################
@@ -30,5 +27,5 @@ project(
 #
 ###########################################################
 
-add_subdirectory("Libs")
-add_subdirectory("Console")
+add_subdirectory("LoggerLib")
+add_subdirectory("VersionLib");

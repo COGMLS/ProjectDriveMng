@@ -33,7 +33,11 @@ add_compile_definitions(UNICODE)
 add_compile_definitions(_UNICODE)
 
 # Defined the project:
-project(RemoteLinkSelector VERSION 0.0.1 DESCRIPTION "Tool to select an specific destination for symbolic link that can change it's reference to a remote git server.")
+project(
+			RemoteLinkSelector
+			VERSION 0.0.1
+			DESCRIPTION "Tool to select an specific destination for symbolic link that can change it's reference to a remote git server."
+		)
 
 ###########################################################
 #
@@ -48,10 +52,12 @@ project(RemoteLinkSelector VERSION 0.0.1 DESCRIPTION "Tool to select an specific
 add_executable(
 				RemoteLinkSel # Application's name
 				"main.cpp"
+				"commands.hpp" "commands.cpp"
+				"config.hpp" "config.cpp"
 				"definitions.hpp"
 				"directory.hpp" "directory.cpp"
+				"menus.hpp" "menus.cpp"
 				"places.hpp" "places.cpp"
-				"config.hpp" "config.cpp"
 				)
 
 #target_link_libraries(RemoteLinkSelector <libName>)

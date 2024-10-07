@@ -31,7 +31,11 @@ endif()
 add_compile_definitions(UNICODE)
 add_compile_definitions(_UNICODE)
 
-project(ManagerTools VERSION 0.0.1 DESCRIPTION "Project Drive Manager Tools")
+project(
+			ManagerTools
+			VERSION 0.0.1
+			DESCRIPTION "Project Drive Manager Tools"
+		)
 
 ###########################################################
 #

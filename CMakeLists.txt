@@ -20,15 +20,23 @@ set(ReposRoot ${CMAKE_CURRENT_LIST_DIR})
 set(FinalBinDir "${ReposRoot}/build/bin")
 
 #set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${FinalBinDir})
-#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FinalBinDir})
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FinalBinDir})
+
+if (NOT WIN32)
+	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${FinalBinDir})
+endif()
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${FinalBinDir})
 
 # Define if will use DEBUG definitions in compilation
 set(DebugSolution True)
 
 enable_testing(True)
 
-project(ProjectDriveMngHelper VERSION 0.0.1 DESCRIPTION "Complete solution for Project Drive Manager Solution repository.")
+project(
+			ProjectDriveMngSln
+			VERSION 0.0.1
+			DESCRIPTION "Complete solution for Project Drive Manager Solution repository."
+		)
 
 ###########################################################
 #

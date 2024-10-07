@@ -15,7 +15,11 @@ cmake_minimum_required(VERSION 3.28)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(ProjectDriveMngLibs VERSION 0.0.1 DESCRIPTION "Project Drive Manager libraries.")
+project(
+			ProjectDriveMngLibs
+			VERSION 0.0.1
+			DESCRIPTION "Project Drive Manager libraries."
+		)
 
 ###########################################################
 #
@@ -23,3 +27,6 @@ project(ProjectDriveMngLibs VERSION 0.0.1 DESCRIPTION "Project Drive Manager lib
 #
 ###########################################################
 
+#add_subdirectory("Imported")
+add_subdirectory("Imported/LoggerLib")
+add_subdirectory("Imported/VersionLib")

@@ -179,7 +179,7 @@ int main (int argc, const char* argv[], const char* argp[])
 
 					int saveStatus = saveFile(newCfg);
 
-					if (saveFile >= 0)
+					if (saveStatus >= 0)
 					{
 						std::cout << "Configurations saved with success." << std::endl;
 						return 0;

@@ -25,7 +25,7 @@ if(WIN32)
 	add_compile_definitions(_CONSOLE)
 endif()
 
-if(DebugProjectDriveMng)
+if(DebugProjectDriveMng OR DebugSolution)
 	add_compile_definitions(DEBUG)
 endif()
 
@@ -33,26 +33,42 @@ add_compile_definitions(UNICODE)
 add_compile_definitions(_UNICODE)
 
 # Defined the project:
-project(ProjectDriveConsole VERSION 0.0.1 DESCRIPTION "Console for Project Drive Manager.")
+project(
+			ProjectDriveMng
+			VERSION 0.0.1
+			DESCRIPTION "Project Drive Manager Console"
+		)
 
 ###########################################################
 #
-# Project components an settings:
+# Project components settings:
 #
 ###########################################################
 
 # Include libraries directories source codes:
-#include_directories("${ProjectDriveMngRoot}/Libs/<lib>")
+#include_directories("${ReposRoot}/Libs/<lib>")
 
 # Define the executable properties:
-add_executable(ProjectDriveConsole "main.cpp")
+add_executable(
+					ProjectDriveMng
+					"main.cpp"
+				)
 
-# Link libraries:
-#target_link_libraries(ProjectDriveConsole <libname>)
-
-# Link libraries manually if some problem occur
-if(DebugProjectDriveMng)
-	#target_link_libraries(ProjectDriveConsole ${CMAKE_SOURCE_DIR}/build/<Path2SolutionDir>/<SolutionDir>/<lib>/Debug/<libfile>.lib)
+# Define manual library link:
+set(UseManualTargetLinkLibs False)
+				
+# Link the VersionLib:
+if(UseManualTargetLinkLibs)
+	if (WIN32)
+		if(DebugProjectDriveMng)
+			#target_link_libraries(ProjectDriveMng ${ReposRoot}/build/VersionLib/Libs/<lib>/Debug/VersionLib.lib)
+		else()
+			#target_link_libraries(ProjectDriveMng ${ReposRoot}/build/VersionLib/Libs/<lib>/Release/VersionLib.lib)
+		endif()
+	else()
+		#target_link_libraries(ProjectDriveMng ${ReposRoot}/build/bin/libVersionLib.so)
+	endif()
 else()
-	#target_link_libraries(ProjectDriveConsole ${CMAKE_SOURCE_DIR}/build/<Path2SolutionDir>/<SolutionDir>/<lib>/Release/<libfile>.lib)
+	target_link_libraries(ProjectDriveMng VersionLib)
+	target_link_libraries(ProjectDriveMng LoggerLib)
 endif()
