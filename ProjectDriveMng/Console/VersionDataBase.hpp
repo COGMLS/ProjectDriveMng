@@ -5,6 +5,7 @@
 
 #include <array>
 #include <string>
+#include <vector>
 
 #include "ProjectDriveMngVersion.hpp"
 #include "../Libs/Imported/VersionLib/VersionLib.hpp"
@@ -12,11 +13,11 @@
 #include "LoggerLibVersionTools.hpp"
 #include "ConsoleExtVersionTools.hpp"
 
-const std::array<std::string, 3> verMinDb = 
+const std::array<std::array<std::string, 2>, 3> verMinDb = 
 {
-	"0.1.0",	// Console Extensions
-	"3.0.0", 	// LoggerLib
-	"0.8.0"	 	// VersionLib
+	std::array<std::string, 2>{"Console Extensions", "0.1.0"},
+	std::array<std::string, 2>{"LoggerLib", "3.0.0"},
+	std::array<std::string, 2>{"VersionLib", "0.8.0"}
 };
 
 VersionLib::VersionData ProjectDriveMng_vInfo(
@@ -24,15 +25,16 @@ VersionLib::VersionData ProjectDriveMng_vInfo(
 	PROJECT_DRIVE_MANAGER_MINOR_VERSION,
 	PROJECT_DRIVE_MANAGER_PATCH_VERSION,
 	PROJECT_DRIVE_MANAGER_BUILD_NUMBER,
-	VersionLib::BuildType::ALPHA,//VersionLib::str2BuildType(PROJECT_DRIVE_MANAGER_BUILD_TYPE),
+	VersionLib::str2BuildType(PROJECT_DRIVE_MANAGER_BUILD_TYPE),
 	PROJECT_DRIVE_MANAGER_REVISION_NUMBER
 );
 
-ConsoleExt::Version ConsoleExt_vStrcutInfo = ConsoleExt::getLibVersion();
-LoggerLib::Version LoggerLib_vStructInfo = LoggerLib::getLibVersion();
+const std::vector<VersionLib::VersionData> getVersionDb();
 
-VersionLib::VersionData ConsoleExt_vInfo(ConsoleExt::getVersionStr(ConsoleExt_vStrcutInfo, true, true));
-VersionLib::VersionData LoggerLib_vInfo(LoggerLib::getVersionStr(LoggerLib_vStructInfo, true, true));
-VersionLib::VersionData VersionLib_vInfo(VersionLib::internalVersionData);
+const std::vector<VersionLib::VersionData> getMinVersionDb();
+
+// LibName MinVer ActualVer Status
+
+const std::vector<std::array<std::string, 4>> testLibCompat (const std::vector<VersionLib::VersionData>& actualVer);
 
 #endif // !VERSION_DATABASE_HPP

@@ -56,7 +56,7 @@ add_executable(
 					ProjectDriveMng
 					"main.cpp"
 					"ProjectDriveMngVersion.hpp"
-					"VersionDataBase.hpp"
+					"VersionDataBase.hpp" "VersionDataBase.cpp"
 				)
 
 # Define manual library link:
