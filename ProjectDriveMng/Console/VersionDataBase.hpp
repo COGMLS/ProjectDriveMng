@@ -20,14 +20,7 @@ const std::array<std::array<std::string, 2>, 3> verMinDb =
 	std::array<std::string, 2>{"VersionLib", "0.8.0"}
 };
 
-VersionLib::VersionData ProjectDriveMng_vInfo(
-	PROJECT_DRIVE_MANAGER_MAJOR_VERSION,
-	PROJECT_DRIVE_MANAGER_MINOR_VERSION,
-	PROJECT_DRIVE_MANAGER_PATCH_VERSION,
-	PROJECT_DRIVE_MANAGER_BUILD_NUMBER,
-	VersionLib::str2BuildType(PROJECT_DRIVE_MANAGER_BUILD_TYPE),
-	PROJECT_DRIVE_MANAGER_REVISION_NUMBER
-);
+VersionLib::VersionData getProjectDriveMngVersion();
 
 const std::vector<VersionLib::VersionData> getVersionDb();
 

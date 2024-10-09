@@ -2,12 +2,13 @@
 
 #include "VersionDataBase.hpp"
 
-#include "../Libs/Imported/VersionLib/VersionLib.hpp"
+//#include "../Libs/Imported/VersionLib/VersionLib.hpp"
 
 int main (int argc, const char* argv[], const char* argp[])
 {
 	const std::vector<VersionLib::VersionData> verDb = getVersionDb();
 	auto verStatus = testLibCompat(verDb);
+	VersionLib::VersionData ProjectDriveMng_vInfo = getProjectDriveMngVersion();
 
 	std::cout << "Project Drive Manager Console\t" << ProjectDriveMng_vInfo.getVersionStr(false, false) << std::endl;
 

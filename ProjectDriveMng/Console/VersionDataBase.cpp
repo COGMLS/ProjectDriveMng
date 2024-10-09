@@ -1,5 +1,19 @@
 #include "VersionDataBase.hpp"
 
+VersionLib::VersionData getProjectDriveMngVersion()
+{
+    VersionLib::VersionData ProjectDriveMng_vInfo(
+		PROJECT_DRIVE_MANAGER_MAJOR_VERSION,
+		PROJECT_DRIVE_MANAGER_MINOR_VERSION,
+		PROJECT_DRIVE_MANAGER_PATCH_VERSION,
+		PROJECT_DRIVE_MANAGER_BUILD_NUMBER,
+		VersionLib::str2BuildType(PROJECT_DRIVE_MANAGER_BUILD_TYPE),
+		PROJECT_DRIVE_MANAGER_REVISION_NUMBER
+	);
+
+	return ProjectDriveMng_vInfo;
+}
+
 const std::vector<VersionLib::VersionData> getVersionDb()
 {
     std::vector<VersionLib::VersionData> db;
