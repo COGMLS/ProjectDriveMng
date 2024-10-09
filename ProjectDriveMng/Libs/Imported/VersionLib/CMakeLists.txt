@@ -61,7 +61,7 @@ if (WIN32)
 	add_library(
 					VersionLib
 					SHARED
-					"dllmain.hpp" "dllmain.cpp"
+					"dllmain.cpp"
 					"BuildTypes.hpp"
 					"Tools.hpp" "Tools.cpp"
 					"VersionClass.hpp" "VersionClass.cpp"
