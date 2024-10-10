@@ -84,7 +84,7 @@ const std::vector<std::array<std::string, 4>> testLibCompat(const std::vector<Ve
 
 	auto minVer = getMinVersionDb();
 
-	if (verCompatStatus.size() != actualVer.size())
+	if (minVer.size() != actualVer.size())
 	{
 		return verCompatStatus;	// Return an empty list of compatibility check.
 	}
@@ -108,6 +108,8 @@ const std::vector<std::array<std::string, 4>> testLibCompat(const std::vector<Ve
 		{
 			status[3] = "Not compatible";
 		}
+
+		verCompatStatus.push_back(status);
 	}
 
 	return verCompatStatus;

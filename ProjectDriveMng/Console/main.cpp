@@ -2,8 +2,6 @@
 
 #include "VersionDataBase.hpp"
 
-//#include "../Libs/Imported/VersionLib/VersionLib.hpp"
-
 int main (int argc, const char* argv[], const char* argp[])
 {
 	const std::vector<VersionLib::VersionData> verDb = getVersionDb();
