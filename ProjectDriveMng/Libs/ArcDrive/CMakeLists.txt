@@ -53,7 +53,10 @@ project(
 
 # Include libraries directories source codes:
 #include_directories("${ReposRoot}/Libraries/<lib>")
+include_directories("${ArcMngRoot}")
+include_directories("${ArcMngRoot}/Config")
 include_directories("${ArcMngRoot}/Drive")
+include_directories("${ArcMngRoot}/Project")
 
 # Define to export the library methods if is Windows:
 if(WIN32)
@@ -61,6 +64,7 @@ if(WIN32)
 	add_compile_definitions(ARC_DRIVE_LIB_EXPORTS)
 	add_compile_definitions(ARC_PROJECT_LIB_EXPORTS)
 	add_compile_definitions(ARC_MANAGER_LIB_EXPORTS)
+	add_compile_definitions(ARC_CONFIG_LIB_EXPORTS)
 endif()
 
 if (WIN32)
@@ -68,6 +72,9 @@ if (WIN32)
 					ArcMng
 					SHARED
 					"dllmain.hpp" "dllmain.cpp"
+					# Config library part:
+					"Config/ArcConfig.hpp"
+					"Config/ArcConfigTools.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
@@ -80,6 +87,9 @@ else()
 	add_library(
 					ArcMng
 					SHARED
+					# Config library part:
+					"Config/ArcConfig.hpp"
+					"Config/ArcConfigTools.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
