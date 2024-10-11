@@ -27,5 +27,6 @@ project(
 #
 ###########################################################
 
+add_subdirectory("ConsoleExtensions")
 add_subdirectory("LoggerLib")
-add_subdirectory("VersionLib");
+add_subdirectory("VersionLib")

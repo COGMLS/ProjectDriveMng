@@ -1,6 +1,6 @@
 ﻿###########################################################
 #
-# CMakeLists: Project Drive Manager Libraries
+# CMakeLists: Archive Libraries
 #
 ###########################################################
 
@@ -27,7 +27,8 @@ project(
 #
 ###########################################################
 
-#add_subdirectory("Imported")
-add_subdirectory("Imported/LoggerLib")
-add_subdirectory("Imported/VersionLib")
-add_subdirectory("Imported/ConsoleExtensions")
+add_subdirectory("Imported")
+#add_subdirectory("Imported/LoggerLib")
+#add_subdirectory("Imported/VersionLib")
+#add_subdirectory("Imported/ConsoleExtensions")
+add_subdirectory("ArcDrive")
