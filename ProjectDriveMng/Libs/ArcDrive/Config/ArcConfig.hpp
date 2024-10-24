@@ -36,34 +36,28 @@
 #include <thread>
 #include <array>
 #include <map>
+#include <stdexcept>
+
+#include "ConfigData.hpp"
 
 namespace ArcLib
 {
 	namespace Config
 	{
-		enum ArcSettingsType
-		{
-			NULL_CONFIG,
-			STRING_CONFIG,
-			INT_CONFIG,
-			LONG_CONFIG,
-			FLOAT_CONFIG,
-			DOUBLE_CONFIG,
-			BINARY_CONFIG,
-			BOOLEAN_CONFIG
-		};
-
 		class ARC_LIB_API ArcSettingsEntry
 		{
 			private:
 
-				std::string name;
-				std::string value;
-				ArcSettingsType type;
+				std::string key;
+				ArcLib::Datatypes::ConfigData value;
 			
 			public:
 
-				ArcSettingsEntry (std::string name, std::string value);
+				ArcSettingsEntry (std::string key);
+
+				ArcSettingsEntry (std::string key, std::string value);
+
+				ArcSettingsEntry (std::string key, ArcLib::Datatypes::ConfigData value);
 
 				ArcSettingsEntry (const ArcLib::Config::ArcSettingsEntry& other);
 
@@ -71,29 +65,52 @@ namespace ArcLib
 
 				~ArcSettingsEntry();
 
-				std::string getName();
+				ArcLib::Config::ArcSettingsEntry& operator= (const ArcLib::Config::ArcSettingsEntry& other);
 
-				std::string getValue();
+				ArcLib::Config::ArcSettingsEntry& operator= (ArcLib::Config::ArcSettingsEntry&& other) noexcept;
 
-				ArcSettingsEntry getType();
+				std::string getKey();
+
+				ArcLib::Datatypes::ConfigData getValue();
+
+				ArcLib::Datatypes::ArcConfigDataType getType();
+
+				void setKey (std::string key);
+
+				void setValue (ArcLib::Datatypes::ConfigData& value);
 		};
 
 		class ARC_LIB_API ArcSettings
 		{
 			private:
 
-				std::string name;
+				std::fstream fs;
+				std::ios::openmode mode;
+				std::string filename;
 				std::filesystem::path path;
 				std::vector<std::string> fileV;
-				std::map<std::string, ArcSettingsEntry> settings;
+				std::map<std::string, ArcLib::Config::ArcSettingsEntry> settings;
+				bool changed;
+
+				void updateConfigMap();
 
 			public:
-
-				ArcSettings();
 
 				ArcSettings (std::filesystem::path path);
 
 				~ArcSettings();
+
+				bool findSetting (std::string key);
+
+				ArcSettingsEntry getEntry (std::string key);
+
+				bool setEntry (ArcSettingsEntry& entry);
+
+				bool remove (std::string key);
+
+				int loadFile();
+
+				int saveFile();
 		};
 	}
 }
