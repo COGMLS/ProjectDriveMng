@@ -65,6 +65,7 @@ if(WIN32)
 	add_compile_definitions(ARC_PROJECT_LIB_EXPORTS)
 	add_compile_definitions(ARC_MANAGER_LIB_EXPORTS)
 	add_compile_definitions(ARC_CONFIG_LIB_EXPORTS)
+	add_compile_definitions(ARC_CACHE_LIB_EXPORTS)
 endif()
 
 if (WIN32)
@@ -72,9 +73,11 @@ if (WIN32)
 					ArcMng
 					SHARED
 					"dllmain.hpp" "dllmain.cpp"
+					# Cache System part:
 					# Config library part:
 					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
-					"Config/ArcConfigTools.hpp"
+					"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
+					"Config/ArcDriveConfig.hpp"
 					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
@@ -88,10 +91,13 @@ else()
 	add_library(
 					ArcMng
 					SHARED
+					# Cache System part:
 					# Config library part:
 					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
-					"Config/ArcConfigTools.hpp"
+					"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
+					"Config/ArcDriveConfig.hpp"
 					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
+					"Config/Datatypes.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
