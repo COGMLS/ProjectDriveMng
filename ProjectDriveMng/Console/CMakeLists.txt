@@ -50,6 +50,7 @@ project(
 target_include_directories(ConsoleExtensions PUBLIC "${ProjectDriveMngRoot}/Libs/Imported/ConsoleExtensions")
 target_include_directories(LoggerLib PUBLIC "${ProjectDriveMngRoot}/Libs/Imported/LoggerLib")
 target_include_directories(VersionLib PUBLIC "${ProjectDriveMngRoot}/Libs/VersionLib")
+target_include_directories(ArcMng PUBLIC "${ProjectDriveMngRoot}/Libs/ArcDrive")
 
 # Define the executable properties:
 add_executable(
@@ -77,4 +78,5 @@ else()
 	target_link_libraries(ProjectDriveMng VersionLib)
 	target_link_libraries(ProjectDriveMng LoggerLib)
 	target_link_libraries(ProjectDriveMng ConsoleExtensions)
+	target_link_libraries(ProjectDriveMng ArcMng)
 endif()
