@@ -73,8 +73,9 @@ if (WIN32)
 					SHARED
 					"dllmain.hpp" "dllmain.cpp"
 					# Config library part:
-					"Config/ArcConfig.hpp"
+					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
 					"Config/ArcConfigTools.hpp"
+					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
@@ -88,8 +89,9 @@ else()
 					ArcMng
 					SHARED
 					# Config library part:
-					"Config/ArcConfig.hpp"
+					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
 					"Config/ArcConfigTools.hpp"
+					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
