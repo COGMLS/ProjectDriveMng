@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef ARC_CONFIG_HPP
-#define ARC_CONFIG_HPP
+#ifndef ARC_CONFIG_DATATYPES_HPP
+#define ARC_CONFIG_DATATYPES_HPP
 
 #ifdef WIN32
 	#ifdef ARC_CONFIG_LIB_EXPORTS
@@ -37,19 +37,39 @@
 #include <array>
 #include <map>
 
-#include "Datatypes.hpp"
+#ifdef WIN32
+	#define HOME_BASE_DIRECTORY "USERPROFILE"
+#else
+	#define HOME_BASE_DIRECTORY "HOME"
+#endif // WIN32
 
 namespace ArcLib
 {
 	namespace Config
 	{
-		namespace Tools
+		namespace Datatypes
 		{
-			std::vector<std::string> getDefaultSettings();
+			enum ArcConfigDataType : int
+			{
+				NOT_SET_CONFIG,
+				NULL_CONFIG,
+				STRING_CONFIG,
+				INT_CONFIG,
+				UINT_CONFIG,
+				FLOAT_CONFIG,
+				BOOLEAN_CONFIG,
+				BINARY_CONFIG
+			};
 
-			std::vector<std::filesystem::path> getSettingFiles(std::filesystem::path configRoot);
+			enum DefaultSettings : unsigned short
+			{
+				DEFAULT_SETTING_GENERAL_CONFIG,
+				DEFAULT_SETTING_DRIVE_CONFIG,
+				DEFAULT_SETTING_PROJECT_CONFIG,
+				DEFAULT_SETTING_GIT_CONFIG
+			};
 		}
 	}
 }
 
-#endif // !ARC_CONFIG_HPP
+#endif // !ARC_CONFIG_DATATYPES_HPP

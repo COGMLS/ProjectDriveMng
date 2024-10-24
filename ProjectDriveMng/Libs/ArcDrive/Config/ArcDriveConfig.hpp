@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef ARC_CONFIG_HPP
-#define ARC_CONFIG_HPP
+#ifndef ARC_DRIVE_CONFIG_HPP
+#define ARC_DRIVE_CONFIG_HPP
 
 #ifdef WIN32
 	#ifdef ARC_CONFIG_LIB_EXPORTS
@@ -28,28 +28,9 @@
 	#endif
 #endif // !WIN32
 
-#include <filesystem>
-#include <string>
-#include <fstream>
-#include <memory>
-#include <vector>
-#include <thread>
-#include <array>
-#include <map>
-
+#include "ArcConfig.hpp"
+#include "ArcConfigTools.hpp"
+#include "ConfigData.hpp"
 #include "Datatypes.hpp"
 
-namespace ArcLib
-{
-	namespace Config
-	{
-		namespace Tools
-		{
-			std::vector<std::string> getDefaultSettings();
-
-			std::vector<std::filesystem::path> getSettingFiles(std::filesystem::path configRoot);
-		}
-	}
-}
-
-#endif // !ARC_CONFIG_HPP
+#endif // !ARC_DRIVE_CONFIG_HPP

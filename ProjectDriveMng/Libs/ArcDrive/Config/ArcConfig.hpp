@@ -49,7 +49,7 @@ namespace ArcLib
 			private:
 
 				std::string key;
-				ArcLib::Datatypes::ConfigData value;
+				ArcLib::Config::ConfigData value;
 			
 			public:
 
@@ -57,7 +57,7 @@ namespace ArcLib
 
 				ArcSettingsEntry (std::string key, std::string value);
 
-				ArcSettingsEntry (std::string key, ArcLib::Datatypes::ConfigData value);
+				ArcSettingsEntry (std::string key, ArcLib::Config::ConfigData value);
 
 				ArcSettingsEntry (const ArcLib::Config::ArcSettingsEntry& other);
 
@@ -71,13 +71,13 @@ namespace ArcLib
 
 				std::string getKey();
 
-				ArcLib::Datatypes::ConfigData getValue();
+				ArcLib::Config::ConfigData getValue();
 
-				ArcLib::Datatypes::ArcConfigDataType getType();
+				ArcLib::Config::Datatypes::ArcConfigDataType getType();
 
 				void setKey (std::string key);
 
-				void setValue (ArcLib::Datatypes::ConfigData& value);
+				void setValue (ArcLib::Config::ConfigData& value);
 		};
 
 		class ARC_LIB_API ArcSettings
@@ -102,7 +102,7 @@ namespace ArcLib
 
 				bool findSetting (std::string key);
 
-				ArcSettingsEntry getEntry (std::string key);
+				ArcSettingsEntry& getEntry (std::string key);
 
 				bool setEntry (ArcSettingsEntry& entry);
 

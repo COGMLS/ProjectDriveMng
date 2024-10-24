@@ -1,8 +1,8 @@
 #include "ConfigData.hpp"
 
-bool ArcLib::Datatypes::ConfigData::isNull()
+bool ArcLib::Config::ConfigData::isNull()
 {
-	if (this->type == ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG)
+	if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG)
 	{
 		std::string tmp;
 
@@ -30,155 +30,155 @@ bool ArcLib::Datatypes::ConfigData::isNull()
     return false;
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData()
+ArcLib::Config::ConfigData::ConfigData()
 {
 	this->resetData();
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(short value)
+ArcLib::Config::ConfigData::ConfigData(short value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG;
 	this->valueLl.reset(new long long);
 	*this->valueLl = static_cast<long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(int value)
+ArcLib::Config::ConfigData::ConfigData(int value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG;
 	this->valueLl.reset(new long long);
 	*this->valueLl = static_cast<long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(long value)
+ArcLib::Config::ConfigData::ConfigData(long value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG;
 	this->valueLl.reset(new long long);
 	*this->valueLl = static_cast<long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(long long value)
+ArcLib::Config::ConfigData::ConfigData(long long value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG;
 	this->valueLl.reset(new long long);
 	*this->valueLl = static_cast<long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(unsigned short value)
+ArcLib::Config::ConfigData::ConfigData(unsigned short value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG;
 	this->valueUll.reset(new unsigned long long);
 	*this->valueUll = static_cast<unsigned long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(unsigned int value)
+ArcLib::Config::ConfigData::ConfigData(unsigned int value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG;
 	this->valueUll.reset(new unsigned long long);
 	*this->valueUll = static_cast<unsigned long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(unsigned long value)
+ArcLib::Config::ConfigData::ConfigData(unsigned long value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG;
 	this->valueUll.reset(new unsigned long long);
 	*this->valueUll = static_cast<unsigned long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(unsigned long long value)
+ArcLib::Config::ConfigData::ConfigData(unsigned long long value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG;
 	this->valueUll.reset(new unsigned long long);
 	*this->valueUll = static_cast<unsigned long long>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(float value)
+ArcLib::Config::ConfigData::ConfigData(float value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
 	this->valueF.reset(new double);
 	*this->valueF = static_cast<double>(value);
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(double value)
+ArcLib::Config::ConfigData::ConfigData(double value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
 	this->valueF.reset(new double);
 	*this->valueF = value;
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(std::string value)
+ArcLib::Config::ConfigData::ConfigData(std::string value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG;
 	this->valueStr.reset(new std::string);
 	*this->valueStr = value;
 	if (this->isNull())
 	{
-		this->type = ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG;
+		this->type = ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG;
 	}
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(bool value)
+ArcLib::Config::ConfigData::ConfigData(bool value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
 	this->valueB = value;
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(std::bitset<64> value)
+ArcLib::Config::ConfigData::ConfigData(std::bitset<64> value)
 {
 	this->resetData();
-	this->type = ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG;
+	this->type = ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG;
 	this->valueBitSet.reset(new std::bitset<64>);
 	*this->valueBitSet = value;
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(const ConfigData &other)
+ArcLib::Config::ConfigData::ConfigData(const ConfigData &other)
 {
 	this->resetData();
 	this->type = other.type;
 	switch (this->type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
 			this->valueStr.reset(new std::string);
 			*this->valueStr = *other.valueStr;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
 			this->valueLl.reset(new long long);
 			*this->valueLl = *other.valueLl;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
 			this->valueUll.reset(new unsigned long long);
 			*this->valueUll = *other.valueUll;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
 			this->valueF.reset(new double);
 			*this->valueF = *other.valueF;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
 			this->valueB = other.valueB;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
 			this->valueBitSet.reset(new std::bitset<64>);
 			*this->valueBitSet = *other.valueBitSet;
@@ -191,43 +191,43 @@ ArcLib::Datatypes::ConfigData::ConfigData(const ConfigData &other)
 	}
 }
 
-ArcLib::Datatypes::ConfigData::ConfigData(ConfigData &&other) noexcept
+ArcLib::Config::ConfigData::ConfigData(ConfigData &&other) noexcept
 {
 	this->resetData();
 	this->type = other.type;
 	switch (this->type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
 			this->valueStr.reset(new std::string);
 			this->valueStr = std::move(other.valueStr);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
 			this->valueLl.reset(new long long);
 			this->valueLl = std::move(other.valueLl);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
 			this->valueUll.reset(new unsigned long long);
 			this->valueUll = std::move(other.valueUll);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
 			this->valueF.reset(new double);
 			this->valueF = std::move(other.valueF);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
 			this->valueB = other.valueB;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
 			this->valueBitSet.reset(new std::bitset<64>);
 			this->valueBitSet = std::move(other.valueBitSet);
@@ -240,12 +240,12 @@ ArcLib::Datatypes::ConfigData::ConfigData(ConfigData &&other) noexcept
 	}
 }
 
-ArcLib::Datatypes::ConfigData::~ConfigData()
+ArcLib::Config::ConfigData::~ConfigData()
 {
 	this->resetData();
 }
 
-ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(const ConfigData &other)
+ArcLib::Config::ConfigData &ArcLib::Config::ConfigData::operator=(const ConfigData &other)
 {
 	if (this == &other)
 	{
@@ -256,37 +256,37 @@ ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(const Co
 	this->type = other.type;
 	switch (this->type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
 			this->valueStr.reset(new std::string);
 			*this->valueStr = *other.valueStr;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
 			this->valueLl.reset(new long long);
 			*this->valueLl = *other.valueLl;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
 			this->valueUll.reset(new unsigned long long);
 			*this->valueUll = *other.valueUll;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
 			this->valueF.reset(new double);
 			*this->valueF = *other.valueF;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
 			this->valueB = other.valueB;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
 			this->valueBitSet.reset(new std::bitset<64>);
 			*this->valueBitSet = *other.valueBitSet;
@@ -301,7 +301,7 @@ ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(const Co
 	return *this;
 }
 
-ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(ConfigData &&other) noexcept
+ArcLib::Config::ConfigData &ArcLib::Config::ConfigData::operator=(ConfigData &&other) noexcept
 {
 	if (this == &other)
 	{
@@ -312,37 +312,37 @@ ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(ConfigDa
 	this->type = other.type;
 	switch (this->type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
 			this->valueStr.reset(new std::string);
 			this->valueStr = std::move(other.valueStr);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
 			this->valueLl.reset(new long long);
 			this->valueLl = std::move(other.valueLl);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
 			this->valueUll.reset(new unsigned long long);
 			this->valueUll = std::move(other.valueUll);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
 			this->valueF.reset(new double);
 			this->valueF = std::move(other.valueF);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
 			this->valueB = other.valueB;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
 			this->valueBitSet.reset(new std::bitset<64>);
 			this->valueBitSet = std::move(other.valueBitSet);
@@ -357,11 +357,11 @@ ArcLib::Datatypes::ConfigData &ArcLib::Datatypes::ConfigData::operator=(ConfigDa
 	return *this;
 }
 
-bool ArcLib::Datatypes::ConfigData::resetData()
+bool ArcLib::Config::ConfigData::resetData()
 {
 	try
 	{
-		this->type = ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
+		this->type = ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
 		this->valueB = false;
 		this->valueStr.reset(nullptr);
 		this->valueLl.reset(nullptr);
@@ -377,34 +377,34 @@ bool ArcLib::Datatypes::ConfigData::resetData()
 	}
 }
 
-bool ArcLib::Datatypes::ConfigData::isConfigDataSet()
+bool ArcLib::Config::ConfigData::isConfigDataSet()
 {
-	return this->type != ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
+	return this->type != ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
 }
 
-bool ArcLib::Datatypes::ConfigData::isNullValue()
+bool ArcLib::Config::ConfigData::isNullValue()
 {
-    return this->type == ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG;
+    return this->type == ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG;
 }
 
-ArcLib::Datatypes::ArcConfigDataType ArcLib::Datatypes::ConfigData::getType()
+ArcLib::Config::Datatypes::ArcConfigDataType ArcLib::Config::ConfigData::getType()
 {
     return this->type;
 }
 
-std::string ArcLib::Datatypes::ConfigData::getValueStr()
+std::string ArcLib::Config::ConfigData::getValueStr()
 {
 	std::string valStr;
 
 	switch (this->type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
 			valStr = *this->valueStr;
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
 			try
 			{
@@ -416,7 +416,7 @@ std::string ArcLib::Datatypes::ConfigData::getValueStr()
 			}
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
 			try
 			{
@@ -428,7 +428,7 @@ std::string ArcLib::Datatypes::ConfigData::getValueStr()
 			}
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
 			try
 			{
@@ -440,7 +440,7 @@ std::string ArcLib::Datatypes::ConfigData::getValueStr()
 			}
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
 			try
 			{
@@ -452,7 +452,7 @@ std::string ArcLib::Datatypes::ConfigData::getValueStr()
 			}
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
 			try
 			{
@@ -473,9 +473,9 @@ std::string ArcLib::Datatypes::ConfigData::getValueStr()
 	return valStr;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(bool &value)
+bool ArcLib::Config::ConfigData::getData(bool &value)
 {
-	if (this->type == ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG)
+	if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG)
 	{
 		if (&value != nullptr)
 		{
@@ -494,9 +494,9 @@ bool ArcLib::Datatypes::ConfigData::getData(bool &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(long long &value)
+bool ArcLib::Config::ConfigData::getData(long long &value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG)
 	{
 		if (&value != nullptr && this->valueLl.get() != nullptr)
 		{
@@ -515,9 +515,9 @@ bool ArcLib::Datatypes::ConfigData::getData(long long &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(unsigned long long &value)
+bool ArcLib::Config::ConfigData::getData(unsigned long long &value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG)
 	{
 		if (&value != nullptr && this->valueUll.get() != nullptr)
 		{
@@ -536,9 +536,9 @@ bool ArcLib::Datatypes::ConfigData::getData(unsigned long long &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(double &value)
+bool ArcLib::Config::ConfigData::getData(double &value)
 {
-     if (this->type == ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG)
+     if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG)
 	{
 		if (&value != nullptr && this->valueF.get() != nullptr)
 		{
@@ -557,9 +557,9 @@ bool ArcLib::Datatypes::ConfigData::getData(double &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(std::string &value)
+bool ArcLib::Config::ConfigData::getData(std::string &value)
 {
-	if (this->type == ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG)
+	if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG)
 	{
 		if (&value != nullptr && this->valueStr.get() != nullptr)
 		{
@@ -578,9 +578,9 @@ bool ArcLib::Datatypes::ConfigData::getData(std::string &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::getData(std::bitset<64> &value)
+bool ArcLib::Config::ConfigData::getData(std::bitset<64> &value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG)
 	{
 		if (&value != nullptr && this->valueBitSet.get() != nullptr)
 		{
@@ -599,9 +599,9 @@ bool ArcLib::Datatypes::ConfigData::getData(std::bitset<64> &value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(bool value)
+bool ArcLib::Config::ConfigData::setData(bool value)
 {
-	if (this->type == ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG)
+	if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG)
 	{
 		if (&value != nullptr)
 		{
@@ -620,9 +620,9 @@ bool ArcLib::Datatypes::ConfigData::setData(bool value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(long long value)
+bool ArcLib::Config::ConfigData::setData(long long value)
 {
-	if (this->type == ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG)
+	if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG)
 	{
 		if (&value != nullptr && this->valueLl.get() != nullptr)
 		{
@@ -641,9 +641,9 @@ bool ArcLib::Datatypes::ConfigData::setData(long long value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(unsigned long long value)
+bool ArcLib::Config::ConfigData::setData(unsigned long long value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG)
 	{
 		if (&value != nullptr && this->valueUll.get() != nullptr)
 		{
@@ -662,9 +662,9 @@ bool ArcLib::Datatypes::ConfigData::setData(unsigned long long value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(double value)
+bool ArcLib::Config::ConfigData::setData(double value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG)
 	{
 		if (&value != nullptr && this->valueF.get() != nullptr)
 		{
@@ -683,9 +683,9 @@ bool ArcLib::Datatypes::ConfigData::setData(double value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(std::string value)
+bool ArcLib::Config::ConfigData::setData(std::string value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG)
 	{
 		if (&value != nullptr && this->valueStr.get() != nullptr)
 		{
@@ -694,7 +694,7 @@ bool ArcLib::Datatypes::ConfigData::setData(std::string value)
 				*this->valueStr = value;
 				if (this->isNull())
 				{
-					this->type = ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG;
+					this->type = ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG;
 				}
 				return true;
 			}
@@ -708,9 +708,9 @@ bool ArcLib::Datatypes::ConfigData::setData(std::string value)
     return false;
 }
 
-bool ArcLib::Datatypes::ConfigData::setData(std::bitset<64> value)
+bool ArcLib::Config::ConfigData::setData(std::bitset<64> value)
 {
-    if (this->type == ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG)
+    if (this->type == ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG)
 	{
 		if (&value != nullptr && this->valueBitSet.get() != nullptr)
 		{

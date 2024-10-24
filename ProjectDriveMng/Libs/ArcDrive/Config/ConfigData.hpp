@@ -33,23 +33,13 @@
 #include <bitset>
 #include <cctype>
 
+#include "Datatypes.hpp"
+
 namespace ArcLib
 {
-	namespace Datatypes
+	namespace Config
 	{
-		enum ArcConfigDataType : int
-		{
-			NOT_SET_CONFIG,
-			NULL_CONFIG,
-			STRING_CONFIG,
-			INT_CONFIG,
-			UINT_CONFIG,
-			FLOAT_CONFIG,
-			BOOLEAN_CONFIG,
-			BINARY_CONFIG
-		};
-
-		class ConfigData
+		class ARC_LIB_API ConfigData
 		{
 			private:
 
@@ -70,7 +60,7 @@ namespace ArcLib
 				 * 6: Boolean
 				 * 7: Binary
 				***************************/
-				ArcConfigDataType type;
+				ArcLib::Config::Datatypes::ArcConfigDataType type;
 
 				bool isNull();
 
@@ -120,7 +110,7 @@ namespace ArcLib
 
 				bool isNullValue();
 
-				ArcConfigDataType getType();
+				ArcLib::Config::Datatypes::ArcConfigDataType getType();
 
 				std::string getValueStr();
 

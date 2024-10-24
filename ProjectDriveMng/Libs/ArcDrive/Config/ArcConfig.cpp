@@ -3,14 +3,14 @@
 ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key)
 {
 	this->key = key;
-	this->value = ArcLib::Datatypes::ConfigData();
+	this->value = ArcLib::Config::ConfigData();
 }
 
 ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string value)
 {
 	this->key = key;
 
-	ArcLib::Datatypes::ArcConfigDataType type = ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
+	ArcLib::Config::Datatypes::ArcConfigDataType type = ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG;
 
 	long long tmpLl;
 	unsigned long long tmpUll;
@@ -21,7 +21,7 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 	try
 	{
 		tmpUll = std::stoull(value);
-		type = ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG;
+		type = ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG;
 	}
 	catch(const std::exception&)
 	{
@@ -31,7 +31,7 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 	try
 	{
 		tmpLl = std::stoll(value);
-		type = ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG;
+		type = ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG;
 	}
 	catch(const std::exception&)
 	{
@@ -41,14 +41,14 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 	try
 	{
 		tmpF = std::stod(value);
-		type = ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
+		type = ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG;
 	}
 	catch(const std::exception&)
 	{
 		
 	}
 
-	if (type == ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
+	if (type == ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
 	{
 		std::string tmp;
 		for (size_t i = 0; i < value.size(); i++)
@@ -69,22 +69,22 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 		if (tmp == "true")
 		{
 			tmpB = true;
-			type = ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
+			type = ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
 		}
 		
 		if (tmp == "false")
 		{
 			tmpB = false;
-			type = ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
+			type = ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG;
 		}
 	}
 
-	if (type == ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
+	if (type == ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
 	{
 		try
 		{
 			tmpBitset = std::bitset<64>(value);
-			type = ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG;
+			type = ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG;
 		}
 		catch(const std::exception&)
 		{
@@ -92,44 +92,44 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 		}
 	}
 
-	if (type == ArcLib::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
+	if (type == ArcLib::Config::Datatypes::ArcConfigDataType::NOT_SET_CONFIG)
 	{
-		type = ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG;
+		type = ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG;
 	}
 
-	ArcLib::Datatypes::ConfigData cfgVal;
+	ArcLib::Config::ConfigData cfgVal;
 
 	switch (type)
 	{
-		case ArcLib::Datatypes::ArcConfigDataType::NULL_CONFIG:
-		case ArcLib::Datatypes::ArcConfigDataType::STRING_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::NULL_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::STRING_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(value);
+			cfgVal = ArcLib::Config::ConfigData(value);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::INT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::INT_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(tmpLl);
+			cfgVal = ArcLib::Config::ConfigData(tmpLl);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::UINT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::UINT_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(tmpUll);
+			cfgVal = ArcLib::Config::ConfigData(tmpUll);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::FLOAT_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(tmpF);
+			cfgVal = ArcLib::Config::ConfigData(tmpF);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BOOLEAN_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(tmpB);
+			cfgVal = ArcLib::Config::ConfigData(tmpB);
 			break;
 		}
-		case ArcLib::Datatypes::ArcConfigDataType::BINARY_CONFIG:
+		case ArcLib::Config::Datatypes::ArcConfigDataType::BINARY_CONFIG:
 		{
-			cfgVal = ArcLib::Datatypes::ConfigData(tmpBitset);
+			cfgVal = ArcLib::Config::ConfigData(tmpBitset);
 			break;
 		}
 		default:
@@ -141,7 +141,7 @@ ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, std::string 
 	this->value = cfgVal;
 }
 
-ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, ArcLib::Datatypes::ConfigData value)
+ArcLib::Config::ArcSettingsEntry::ArcSettingsEntry(std::string key, ArcLib::Config::ConfigData value)
 {
 	this->key = key;
 	this->value = value;
@@ -194,12 +194,12 @@ std::string ArcLib::Config::ArcSettingsEntry::getKey()
     return this->key;
 }
 
-ArcLib::Datatypes::ConfigData ArcLib::Config::ArcSettingsEntry::getValue()
+ArcLib::Config::ConfigData ArcLib::Config::ArcSettingsEntry::getValue()
 {
     return this->value;
 }
 
-ArcLib::Datatypes::ArcConfigDataType ArcLib::Config::ArcSettingsEntry::getType()
+ArcLib::Config::Datatypes::ArcConfigDataType ArcLib::Config::ArcSettingsEntry::getType()
 {
     return this->value.getType();
 }
@@ -209,7 +209,7 @@ void ArcLib::Config::ArcSettingsEntry::setKey(std::string key)
 	this->key = key;
 }
 
-void ArcLib::Config::ArcSettingsEntry::setValue(ArcLib::Datatypes::ConfigData &value)
+void ArcLib::Config::ArcSettingsEntry::setValue(ArcLib::Config::ConfigData &value)
 {
 	this->value = value;
 }
@@ -333,7 +333,7 @@ bool ArcLib::Config::ArcSettings::findSetting(std::string key)
 	return this->settings.contains(key);
 }
 
-ArcLib::Config::ArcSettingsEntry ArcLib::Config::ArcSettings::getEntry(std::string key)
+ArcLib::Config::ArcSettingsEntry &ArcLib::Config::ArcSettings::getEntry(std::string key)
 {
 	return this->settings.at(key);
 }
@@ -347,7 +347,7 @@ bool ArcLib::Config::ArcSettings::setEntry(ArcLib::Config::ArcSettingsEntry &ent
 		
 		if (this->settings.contains(key))
 		{
-			auto p = &this->settings.at(key);
+			auto p = &this->getEntry(key);
 			*p = entry;
 		}
 		else
