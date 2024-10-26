@@ -281,7 +281,12 @@ void ArcLib::Config::ArcSettings::updateConfigMap()
 ArcLib::Config::ArcSettings::ArcSettings(std::filesystem::path path)
 {
 	this->path = path;
+
+	#ifdef _MSC_VER
+	this->filename = this->path.filename().string()
+	#else
 	this->filename = this->path.filename();
+	#endif // !_MSC_VER
 
 	this->mode = std::ios::out;
 
