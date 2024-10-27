@@ -39,6 +39,7 @@
 #include <stdexcept>
 
 #include "ConfigData.hpp"
+#include "ArcConfigTools.hpp"
 
 namespace ArcLib
 {

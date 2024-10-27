@@ -283,7 +283,7 @@ ArcLib::Config::ArcSettings::ArcSettings(std::filesystem::path path)
 	this->path = path;
 
 	#ifdef _MSC_VER
-	this->filename = this->path.filename().string()
+	this->filename = this->path.filename().string();
 	#else
 	this->filename = this->path.filename();
 	#endif // !_MSC_VER
@@ -293,7 +293,15 @@ ArcLib::Config::ArcSettings::ArcSettings(std::filesystem::path path)
 	if (!std::filesystem::exists(this->path))
 	{
 		this->fs.open(this->path, this->mode);
-		if (!fs.is_open())
+		if (fs.is_open())
+		{
+			std::vector<std::string> defaultSettings = ArcLib::Config::Tools::getDefaultSettings();
+			for (size_t i = 0; i < defaultSettings.size(); i++)
+			{
+				fs << defaultSettings[i] << std::endl;
+			}
+		}
+		else
 		{
 			std::string errMsg = "Invalid path or impossible to create file in: " + this->path.string();
 			std::invalid_argument e(errMsg);
