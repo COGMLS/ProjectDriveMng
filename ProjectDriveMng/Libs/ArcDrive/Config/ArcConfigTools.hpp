@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef ARC_CONFIG_HPP
-#define ARC_CONFIG_HPP
+#ifndef ARC_CONFIG_TOOLS_HPP
+#define ARC_CONFIG_TOOLS_HPP
 
 #ifdef WIN32
 	#ifdef ARC_CONFIG_LIB_EXPORTS
@@ -36,8 +36,29 @@
 #include <thread>
 #include <array>
 #include <map>
+#include <system_error>
 
 #include "Datatypes.hpp"
+
+#ifdef WIN32
+#include <shlobj_core.h>
+#include <combaseapi.h>
+#else
+#include <cstdlib>
+#endif // !WIN32
+
+/**************************************
+ * Directories to create:
+ * ----------------------------------
+ * On Linux:
+ * $HOME/.config/ProjectDriveMng
+ * $HOME/.cache/ProjectDriveMng
+ * --------------------------
+ * On Windows:
+ * %USERPROFILE%\AppData\Local\ProjectDriveMng
+ * %USERPROFILE%\AppData\Local\ProjectDriveMng\Config
+ * %USERPROFILE%\AppData\Local\ProjectDriveMng\Cache
+**************************************/
 
 namespace ArcLib
 {
@@ -47,9 +68,13 @@ namespace ArcLib
 		{
 			std::vector<std::string> getDefaultSettings();
 
+			int setDirectories(std::vector<ArcLib::Config::Datatypes::ProjectDriveMngFolder>* folders = nullptr);
+
+			std::filesystem::path resolveDirectory(ArcLib::Config::Datatypes::ProjectDriveFolders folder);
+
 			std::vector<std::filesystem::path> getSettingFiles(std::filesystem::path configRoot);
 		}
 	}
 }
 
-#endif // !ARC_CONFIG_HPP
+#endif // !ARC_CONFIG_TOOLS_HPP
