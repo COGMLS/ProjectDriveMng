@@ -79,6 +79,7 @@ if (WIN32)
 					"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
 					"Config/ArcDriveConfig.hpp"
 					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
+					"Config/Datatypes.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
