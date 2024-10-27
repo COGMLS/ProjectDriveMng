@@ -36,12 +36,19 @@
 #include <thread>
 #include <array>
 #include <map>
+#include <system_error>
 
 #ifdef WIN32
 	#define HOME_BASE_DIRECTORY "USERPROFILE"
+	#define PROJECT_DRIVE_MNG_CONFIG "LOCALAPPDATA"
+	#define PROJECT_DRIVE_MNG_CACHE "LOCALAPP"
 #else
 	#define HOME_BASE_DIRECTORY "HOME"
+	#define PROJECT_DRIVE_MNG_CONFIG ".config"
+	#define PROJECT_DRIVE_MNG_CACHE ".cache"
 #endif // WIN32
+
+#define PROJECT_DRIVE_MNG_FOLDER "ProjectDriveMng"
 
 namespace ArcLib
 {
@@ -49,6 +56,9 @@ namespace ArcLib
 	{
 		namespace Datatypes
 		{
+			/**
+			 * @brief Archive configuration datatype
+			 */
 			enum ArcConfigDataType : int
 			{
 				NOT_SET_CONFIG,
@@ -61,12 +71,36 @@ namespace ArcLib
 				BINARY_CONFIG
 			};
 
-			enum DefaultSettings : unsigned short
+			/**
+			 * @brief Archive Drive Libraries config tags
+			 */
+			enum DefaultSettings : int
 			{
 				DEFAULT_SETTING_GENERAL_CONFIG,
 				DEFAULT_SETTING_DRIVE_CONFIG,
 				DEFAULT_SETTING_PROJECT_CONFIG,
 				DEFAULT_SETTING_GIT_CONFIG
+			};
+
+			/**
+			 * @brief Enumerator for Project Drive Manager known folders
+			 */
+			enum ProjectDriveFolders : int
+			{
+				UserHome,					// %USERPROFILE% on Windows or $HOME on Linux
+				ProjectDriveMngProgram,		// Return the program root path
+				ProjectDriveMngConfig,		// %LOCALAPPDATA%\ProjectDriveMng\Config on Windows or $HOME\.config\ProjectDriveMng on Linux
+				ProjectDriveMngCache		// %LOCALAPPDATA%\ProjectDriveMng\Cache on Windows or $HOME\.cache\ProjectDriveMng on Linux
+			};
+
+			/**
+			 * @brief Project Drive Manager known folder struct
+			 */
+			struct ProjectDriveMngFolder
+			{
+				ProjectDriveFolders folder;
+				std::filesystem::path path;
+				std::error_code err;
 			};
 		}
 	}
