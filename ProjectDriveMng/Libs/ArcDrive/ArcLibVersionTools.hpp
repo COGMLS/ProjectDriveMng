@@ -60,7 +60,7 @@ namespace ArcLib
 		v.patch = ARC_DRIVE_LIB_PATCH_VERSION;
 		v.build = ARC_DRIVE_LIB_BUILD_NUMBER;
 		v.revision = ARC_DRIVE_LIB_REVISION_NUMBER;
-		v.type = static_cast<char*>(ARC_DRIVE_LIB_BUILD_TYPE);
+		std::strcpy(v.type, ARC_DRIVE_LIB_BUILD_TYPE);
 		return v;
 	}
 
