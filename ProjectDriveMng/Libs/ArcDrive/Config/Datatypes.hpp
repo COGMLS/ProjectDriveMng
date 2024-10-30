@@ -88,7 +88,7 @@ namespace ArcLib
 			enum ProjectDriveFolders : int
 			{
 				UserHome,					// %USERPROFILE% on Windows or $HOME on Linux
-				ProjectDriveMngProgram,		// Return the program root path
+				ProjectDriveMngProgram,		// Return the program root path. On Windows is %LOCALAPPDATA%\Programs\ProjectDriveMng or %USERPROGRAMFILES%\ProjectDriveMng or $HOME/.local/bin/ProjectDriveMng
 				ProjectDriveMngConfig,		// %LOCALAPPDATA%\ProjectDriveMng\Config on Windows or $HOME\.config\ProjectDriveMng on Linux
 				ProjectDriveMngCache		// %LOCALAPPDATA%\ProjectDriveMng\Cache on Windows or $HOME\.cache\ProjectDriveMng on Linux
 			};

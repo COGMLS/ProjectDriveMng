@@ -41,21 +41,23 @@
 #include "Datatypes.hpp"
 
 #ifdef WIN32
-#include <shlobj_core.h>
-#include <combaseapi.h>
+	#include <shlobj_core.h>
+	#include <combaseapi.h>
 #else
-#include <cstdlib>
+	#include <cstdlib>
 #endif // !WIN32
 
 /**************************************
  * Directories to create:
  * ----------------------------------
  * On Linux:
+ * $HOME/.local/bin
  * $HOME/.config/ProjectDriveMng
  * $HOME/.cache/ProjectDriveMng
  * --------------------------
  * On Windows:
- * %USERPROFILE%\AppData\Local\ProjectDriveMng
+ * %USERPROFILE%\AppData\Local\Programs\ProjectDriveMng (on UserProgramFiles)
+ * %USERPROFILE%\AppData\Local\ProjectDriveMng (deprecated)
  * %USERPROFILE%\AppData\Local\ProjectDriveMng\Config
  * %USERPROFILE%\AppData\Local\ProjectDriveMng\Cache
 **************************************/
@@ -72,7 +74,7 @@ namespace ArcLib
 
 			std::filesystem::path resolveDirectory(ArcLib::Config::Datatypes::ProjectDriveFolders folder);
 
-			std::vector<std::filesystem::path> getSettingFiles(std::filesystem::path configRoot);
+			std::vector<std::filesystem::path> getSettingFiles(std::filesystem::path configRoot, std::string ext = "");
 		}
 	}
 }

@@ -98,6 +98,24 @@ std::filesystem::path ArcLib::Config::Tools::resolveDirectory(ArcLib::Config::Da
 	// Get the KNOWNFOLDERID or folder name for environment:
 	switch (folder)
 	{
+		case ArcLib::Config::Datatypes::ProjectDriveFolders::UserHome:
+		{
+			#ifdef WIN32
+				folderId = KNOWNFOLDERID::FOLDERID_LocalAppData;
+			#else
+				folderId = "HOME";
+			#endif // !WIN32
+			break;
+		}
+		case ArcLib::Config::Datatypes::ProjectDriveFolders::ProjectDriveMngProgram:
+		{
+			#ifdef WIN32
+				folderId = KNOWNFOLDERID::FOLDERID_UserProgramFiles;
+			#else
+				folderId = "HOME";
+			#endif // !WIN32
+			break;
+		}
 		case ArcLib::Config::Datatypes::ProjectDriveFolders::ProjectDriveMngConfig:
 		case ArcLib::Config::Datatypes::ProjectDriveFolders::ProjectDriveMngCache:
 		{
@@ -133,6 +151,15 @@ std::filesystem::path ArcLib::Config::Tools::resolveDirectory(ArcLib::Config::Da
 	// Add the complementary folder path:
 	switch (folder)
 	{
+		case ArcLib::Config::Datatypes::ProjectDriveFolders::ProjectDriveMngProgram:
+		{
+			#ifdef WIN32
+				folderPartialPath = "ProjectDriveMng";
+			#else
+				folderPartialPath = ".local/bin/ProjectDriveMng";
+			#endif // !WIN32
+			break;
+		}
 		case ArcLib::Config::Datatypes::ProjectDriveFolders::ProjectDriveMngConfig:
 		{
 			#ifdef WIN32
@@ -163,7 +190,56 @@ std::filesystem::path ArcLib::Config::Tools::resolveDirectory(ArcLib::Config::Da
 	return finalPath;
 }
 
-std::vector<std::filesystem::path> ArcLib::Config::Tools::getSettingFiles(std::filesystem::path configRoot)
+std::vector<std::filesystem::path> ArcLib::Config::Tools::getSettingFiles(std::filesystem::path configRoot, std::string ext)
 {
-    return std::vector<std::filesystem::path>();
+    std::vector<std::filesystem::path> files;
+
+	if (!std::filesystem::exists(configRoot))
+	{
+		return files;
+	}
+
+	bool anyExt = false;
+
+	if (ext.empty() || ext == "*")
+	{
+		anyExt = true;
+	}
+	else
+	{
+		// Prepare the extension filter:
+
+		if (ext.starts_with('*'))
+		{
+			ext.erase(0, 1);
+		}
+
+		if (!ext.starts_with('.'))
+		{
+			ext = "." + ext;
+		}
+	}
+
+	for (const std::filesystem::directory_entry& d : std::filesystem::directory_iterator(configRoot))
+	{
+		if (d.is_regular_file())
+		{
+			if (anyExt)
+			{
+				files.push_back(d.path());
+			}
+			else
+			{
+				if (d.path().has_extension())
+				{
+					if (d.path().extension().string() == ext)
+					{
+						files.push_back(d.path());
+					}
+				}
+			}
+		}
+	}
+
+	return files;
 }
