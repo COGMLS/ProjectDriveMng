@@ -54,7 +54,7 @@ project(
 # Include libraries directories source codes:
 #include_directories("${ReposRoot}/Libraries/<lib>")
 include_directories("${ArcMngRoot}")
-include_directories("${ArcMngRoot}/Config")
+#include_directories("${ArcMngRoot}/Config")
 include_directories("${ArcMngRoot}/Drive")
 include_directories("${ArcMngRoot}/Project")
 
@@ -64,7 +64,7 @@ if(WIN32)
 	add_compile_definitions(ARC_DRIVE_LIB_EXPORTS)
 	add_compile_definitions(ARC_PROJECT_LIB_EXPORTS)
 	add_compile_definitions(ARC_MANAGER_LIB_EXPORTS)
-	add_compile_definitions(ARC_CONFIG_LIB_EXPORTS)
+	#add_compile_definitions(ARC_CONFIG_LIB_EXPORTS)
 	add_compile_definitions(ARC_CACHE_LIB_EXPORTS)
 endif()
 
@@ -75,11 +75,11 @@ if (WIN32)
 					"dllmain.hpp" "dllmain.cpp"
 					# Cache System part:
 					# Config library part:
-					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
-					"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
-					"Config/ArcDriveConfig.hpp"
-					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
-					"Config/Datatypes.hpp"
+					#"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
+					#"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
+					#"Config/ArcDriveConfig.hpp"
+					#"Config/ConfigData.hpp" "Config/ConfigData.cpp"
+					#"Config/Datatypes.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
@@ -94,11 +94,11 @@ else()
 					SHARED
 					# Cache System part:
 					# Config library part:
-					"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
-					"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
-					"Config/ArcDriveConfig.hpp"
-					"Config/ConfigData.hpp" "Config/ConfigData.cpp"
-					"Config/Datatypes.hpp"
+					#"Config/ArcConfig.hpp" "Config/ArcConfig.cpp"
+					#"Config/ArcConfigTools.hpp" "Config/ArcConfigTools.cpp"
+					#"Config/ArcDriveConfig.hpp"
+					#"Config/ConfigData.hpp" "Config/ConfigData.cpp"
+					#"Config/Datatypes.hpp"
 					# Drive Library part:
 					"Drive/ArcDrive.hpp" "Drive/ArcDrive.cpp"
 					# Project Library part:
